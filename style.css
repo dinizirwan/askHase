@@ -354,52 +354,59 @@ body {
     }
 }
 
-/* Ensure the container doesn't overflow the screen width */
+/* 1. Fix the Body for Mobile Safari */
 body {
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Fallback */
-    min-height: 100dvh; /* Dynamic height for mobile browsers */
-    background-color: #f9f9f9;
-    font-family: 'Roboto', sans-serif;
-    overflow: hidden; /* Prevents awkward scrolling */
+    width: 100vw;
+    height: 100dvh; /* Use dynamic viewport height */
+    background-color: #f0f0f0;
+    overflow: hidden; /* Prevent bounce scrolling */
+    position: fixed; /* Keeps the UI locked in place */
 }
 
-.main-container {
-    width: 95%;
-    max-width: 400px; /* Standard CAPTCHA width */
-    margin: auto;
-}
-
-/* Optimize the Grid for touch */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    gap: 2px; /* Small gap for a clean look */
-    width: 100%;
-}
-
-.grid-container div {
-    aspect-ratio: 1 / 1; /* Keeps tiles perfectly square */
-    background-size: cover;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent; /* Removes the grey flash on tap */
-}
-
-/* The Modal - Ensure it fits iPhone SE screens */
-.captcha-modal {
-    width: 100%;
+/* 2. Fix the Checkbox (Step 1) */
+.captcha-box {
     background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    padding: 15px;
-    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    width: 300px; /* This is fine as it's < 320px */
+    height: 74px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    box-sizing: border-box; /* Crucial for padding */
+
+    /* REMOVE position: absolute; use relative or nothing to let Flexbox work */
+    position: relative;
+    z-index: 10;
 }
 
-/* Make text responsive */
-#instruction-text {
-    font-size: 1.5rem; /* Scales better than fixed pixels */
-    line-height: 1.2;
+/* 3. Fix the Modal (Step 2) */
+.captcha-modal {
+    background: #fff;
+    /* Use max-width so it shrinks on small phones but stays nice on big ones */
+    width: 95%;
+    max-width: 380px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 20;
+}
+
+/* 4. Fix Success Screen Text */
+.success-screen h1 {
+    color: #c2185b;
+    font-size: 2.5em; /* 4em is way too big for iPhone portrait */
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 10px;
 }
