@@ -353,3 +353,53 @@ body {
         transform: scale(1);
     }
 }
+
+/* Ensure the container doesn't overflow the screen width */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Fallback */
+    min-height: 100dvh; /* Dynamic height for mobile browsers */
+    background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden; /* Prevents awkward scrolling */
+}
+
+.main-container {
+    width: 95%;
+    max-width: 400px; /* Standard CAPTCHA width */
+    margin: auto;
+}
+
+/* Optimize the Grid for touch */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 2px; /* Small gap for a clean look */
+    width: 100%;
+}
+
+.grid-container div {
+    aspect-ratio: 1 / 1; /* Keeps tiles perfectly square */
+    background-size: cover;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Removes the grey flash on tap */
+}
+
+/* The Modal - Ensure it fits iPhone SE screens */
+.captcha-modal {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* Make text responsive */
+#instruction-text {
+    font-size: 1.5rem; /* Scales better than fixed pixels */
+    line-height: 1.2;
+}
