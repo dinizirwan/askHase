@@ -46,7 +46,7 @@ function startRound2() {
     // Animate Text Change check
     headerTitle.style.opacity = 0;
     setTimeout(() => {
-        headerTitle.innerText = "your valentine";
+        headerTitle.innerText = "the people you wanna to spend ypur day with";
         headerTitle.style.opacity = 1;
     }, 200);
 
